@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7 no-js" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 no-js" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+
+<!-- Mirrored from busterhtml.mbkip3ms9u-e92498n216kr.p.temp-site.link/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2023 08:07:13 GMT -->
+
+<head>
+	<!-- Basic need -->
+	<title>MovFlix - Search</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<meta property="og:title" content="MovFlix, Nonton Tanpa Iklan h3h3" />
+	<meta property="og:url" content="movflix.fliw.dev"/>
+	<meta property="og:image" content="https://movflix.fliw.dev/images/logo1.png" />
+	<meta property="og:type" content="website" />
+	<meta property="og:description" content="Nonton Film Gratis, tanpa iklan. biar apa? biarin." />
+	<!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+
+	<!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+	<!--preloading-->
+	<div id="preloader">
+		<img class="logo" src="images/logo1.png" alt="" width="70px">
+		<div id="status">
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<!--end of signup form popup-->
+
+	<!-- BEGIN | Header -->
+	<header class="ht-header">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-custom">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header logo">
+					<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<div id="nav-icon1">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+					<a href="index.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+				</div>
+			</nav>
+
+			<!-- top search form -->
+			<div class="top-search">
+				<input type="text" placeholder="Cari Movie disini ya bro/sis wkwk" value="" id="searcher">
+			</div>
+		</div>
+	</header>
+	<!-- END | Header -->
+	<div class="slider movie-items">
+		<div class="container">
+			<div class="row">
+				<div class="social-link">
+				</div>
+				<br>
+				<br>
+				<br>
+				<center>
+				<div class="loader" id="top-loader"></div></center>
+				<div class="slick-multiItemSlider" id="top-slider">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="movie-items">
+		<div class="container">
+			<div class="row ipad-width">
+				<div class="col-md-12">
+					<div class="sidebar">
+						<div class="ads">
+							<img src="images/ciko.png" alt="" width="336" height="296">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- latest new v1 section-->
+	<!--end of latest new v1 section-->
+	<!-- footer section-->
+	<footer class="ht-footer">
+		<div class="container">
+			<center>
+				<a href="index-2.html"><img class="logo" src="images/logo1.png" width="200px" alt=""></a>
+			</center>
+		</div>
+		<div class="ft-copyright">
+			<div class="ft-left">
+				<p>© 2023 MovFlix. All Rights Reserved. Designed by anak tampan rupawan.</p>
+			</div>
+			<div class="backtotop">
+				<p><a href="#" id="back-to-top">Back to top <i class="ion-ios-arrow-thin-up"></i></a></p>
+			</div>
+		</div>
+	</footer>
+	<!-- end of footer section-->
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script>
+		$('#searcher').keypress(function (e) {
+			if (e.which == 13) {
+				var query = $('#searcher').val();
+				window.location.href = 'search.html?q=' + query;
+			}
+		});
+		var queryParam = new URLSearchParams(window.location.search);
+		var query = queryParam.get('q');
+		$('#searcher').val(query);
+		$.ajax({
+			url: 'https://db-movie.fliw.dev/search/' + query,
+			type: 'GET',
+			dataType: 'json',
+			success: function (result) {
+				var data = result.data;
+				var filmId = [];
+				var title = '';
+				for (var i = 0; i < data.length; i++) {
+					data[i].posterImg = data[i].posterImg.substring(8);
+					data[i].posterImg = 'https://s1.lk21static.xyz/' + data[i].posterImg;
+					title = data[i].title;
+					filmId[1] = data[i]._id;
+					$('#top-slider').slick('slickAdd', `
+						<div class="movie-item">
+							<div class="mv-img">
+								<img src="${data[i].posterImg}" alt="" width="185" height="284">
+							</div>
+							<div class="title-in">
+								<div class="cate">
+								</div>
+								<h6><a href="./moviesingle.html?id=${filmId[1]}">${title}</a></h6>
+							</div>
+						</div>
+					`);
+				}
+				// reinit the slider
+				$('#top-slider').slick('reinit');
+				$('#top-loader').hide();
+			}
+		});
+	</script>
+</body>
+
+<!-- Mirrored from busterhtml.mbkip3ms9u-e92498n216kr.p.temp-site.link/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2023 08:07:51 GMT -->
+
+</html>
