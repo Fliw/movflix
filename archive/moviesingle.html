@@ -203,7 +203,7 @@
 		var queryParam = new URLSearchParams(window.location.search);
 		var query = queryParam.get('id');
 		$.ajax({
-			url: 'https://db-movie.fliw.dev/movies/' + query,
+			url: 'https://film.gorjambon.online/movies/' + query,
 			type: 'GET',
 			dataType: 'json',
 			success: function (result) {
@@ -221,7 +221,7 @@
 			}
 		});
 		$.ajax({
-			url: 'https://db-movie.fliw.dev/movies/' + query + '/streams',
+			url: 'https://film.gorjambon.online/movies/' + query + '/streams',
 			type: 'GET',
 			dataType: 'json',
 			success: function (result) {

@@ -407,7 +407,7 @@
 
 
       function fetchData(){
-        fetch(`https://db-movie.fliw.dev/search/${genre}?page=${page}`)
+        fetch(`https://film.gorjambon.online/search/${genre}?page=${page}`)
         .then(response => response.json())
         .then(data => {
           data.data.forEach(movie => {

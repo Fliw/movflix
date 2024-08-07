@@ -480,7 +480,7 @@
 <script src="assets/js/rocket-loader.min.js"></script>
 <script>
   var id = new URLSearchParams(window.location.search).get('m');
-  fetch('https://db-movie.fliw.dev/movies/'+id)
+  fetch('https://film.gorjambon.online/movies/'+id)
   .then(response => response.json())
   .then(res => {
     var ratingHtml = '';
@@ -501,8 +501,8 @@
     document.getElementById('movieTrailer').src = trailerSrc;
   })
 
-  //https://db-movie.fliw.dev/movies/wrath-of-man-2021/streams
-  fetch('https://db-movie.fliw.dev/movies/'+id+'/streams')
+  //https://film.gorjambon.online/movies/wrath-of-man-2021/streams
+  fetch('https://film.gorjambon.online/movies/'+id+'/streams')
   .then(response => response.json())
   .then(res => {
     var sourceHtml = '';

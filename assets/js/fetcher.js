@@ -1,4 +1,4 @@
-fetch('https://db-movie.fliw.dev/popular/movies')
+fetch('https://film.gorjambon.online/popular/movies')
     .then(response => response.json())
     .then(res => {
         console.log(res.data);
