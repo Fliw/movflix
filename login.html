@@ -243,6 +243,11 @@
     if(localStorage.getItem('islgd') == 'true'){
         window.location.href = 'index.html';
     }
+    document.getElementById('password').addEventListener('keypress', function(e){
+        if(e.key == 'Enter'){
+            login();
+        }
+    });
     function login(){
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;

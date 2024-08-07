@@ -59,9 +59,57 @@ fetch('https://film.gorjambon.online/popular/movies')
             `;
             miniThumb.innerHTML += slideContent;
         });
+        const popten = document.getElementById('popten');
+        movies.forEach(movie => {
+            const num = movies.indexOf(movie) + 1;
+            const slideContent = `
+                <li class="swiper-slide">
+                    <div class="iq-top-ten-block">
+                        <div class="block-image position-relative">
+                            <div class="img-box">
+                                <a class="overly-images" href="movie-detail.html?m=${movie._id}">
+                                    <img src="${movie.posterImg}" alt="movie-card" class="img-fluid object-cover">
+                                </a>
+                                <span class="top-ten-numbers texture-text">${num}</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            `;
+            popten.innerHTML += slideContent;
+        });
         initializeSwiper();
     })
     .catch(error => console.error('Error fetching movies:', error));
+
+//same as popten
+fetch('https://film.gorjambon.online/popular/series')
+    .then(response => response.json())
+    .then(res => {
+        console.log(res.data);
+        const series = res.data;
+        const seriesThumb = document.getElementById('toptenseries');
+
+        series.forEach(serie => {
+            const num = series.indexOf(serie) + 1;
+            const slideContent = `
+                <li class="swiper-slide">
+                    <div class="iq-top-ten-block">
+                        <div class="block-image position-relative">
+                            <div class="img-box">
+                                <a class="overly-images" href="series-detail.html?m=${serie._id}&s=1&e=1">
+                                    <img src="${serie.posterImg}" alt="movie-card" class="img-fluid object-cover">
+                                </a>
+                                <span class="top-ten-numbers texture-text">${num}</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            `;
+            seriesThumb.innerHTML += slideContent;
+        });
+        initializeSwiper();
+    })
 
 function initializeSwiper() {
 

@@ -417,6 +417,7 @@
             }else{
               urlMapped = `series-detail.html?m=${movie._id}&s=1&e=1`;
             }
+            movie.posterImg = movie.posterImg.replace('https://tv1.lk21official.mom//', 'https://s3.lk21static.buzz/');
             document.getElementById('movieList').innerHTML += `
             <div class="col-md-2 col-6 mb-4">
               <div class="iq-card card-hover">
