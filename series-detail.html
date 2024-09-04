@@ -219,45 +219,38 @@
             <!-- Movie Description Start-->
             <div class="trending-info mt-4 pt-0 pb-4">
               <div class="row">
+                <div class="iq-button text-center" id="mainNavigation">
+                  
+                  
+                </div>
                 <div class="col-md-9 col-12 mb-auto">
                   <div class="d-block d-lg-flex align-items-center">
+                    
                     <h2
                       class="trending-text fw-bold texture-text text-uppercase my-0 fadeInLeft animated d-inline-block"
                       data-animation-in="fadeInLeft" data-delay-in="0.6" style="opacity: 1; animation-delay: 0.6s"
                       id="movieTitle">
-                      Title
                     </h2>
                     <div class="slider-ratting d-flex align-items-center ms-lg-3 ms-0">
-                      <span class="badge bg-primary" style="margin-right: 4px;" id="movieQuality">Status</span>
+                      <span class="badge bg-primary" style="margin-right: 4px;" id="movieQuality"></span>
                       <ul
                         class="ratting-start p-0 m-0 list-inline text-warning d-flex align-items-center justify-content-left"
                         id="movieRating">
-                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-star-half" aria-hidden="true"></i></li>
                       </ul>
                       <span class="text-white ms-2" id="movieRatingText"></span>
                     </div>
                   </div>
                   <ul class="p-0 mt-2 list-inline d-flex flex-wrap movie-tag" id="movieTags">
-                    <li class="trending-list"><a class="text-primary" href="view-all-movie.html">Action</a></li>
-                    <li class="trending-list"><a class="text-primary" href="view-all-movie.html">Adventure</a></li>
-                    <li class="trending-list"><a class="text-primary" href="view-all-movie.html">Drama</a></li>
                   </ul>
 
                   <div class="d-flex flex-wrap align-items-center text-white text-detail flex-wrap mb-4">
-                    <span class="badge bg-secondary" id="movieCasts">Jokowi</span>
-                    <span class="ms-3 font-Weight-500 genres-info" id="movieDuration">1hr 48mins</span>
+                    <span class="badge bg-secondary" id="movieCasts"></span>
+                    <span class="ms-3 font-Weight-500 genres-info" id="movieDuration"></span>
                   </div>
+                  
                   <p class="trending-dec w-100 mb-4" id="movieDescription">
-                    Zombie Island is a 1998 direct-to-video animated comedy horror film based on Hanna-Barbera's
-                    Scooby-Doo Saturday-morning cartoons. In the film, Shaggy, Scooby, Fred, Velma, and Daphne reunite
-                    after a year-long hiatus from Mystery, Inc. to investigate a bayou island said to be haunted by the
-                    ghost of the pirate Morgan Moonscar. The film was directed by Jim Stenstrum, from a screenplay by
-                    Glenn Leopold.
-                  <p>Dirilis Tanggal: <span id="movieRelease"></span></p>
+                   
+                  <p id="movieRelease"></p>
                 </div>
                 <div class="trailor-video col-md-3 col-12 mt-lg-0 mt-4 mb-md-0 mb-1 text-lg-right">
                   <img src="archive/images/ciko.png" style="border-radius: 10px;" width="300px" alt="">
@@ -269,8 +262,7 @@
                         <h5 class="main-title text-capitalize mb-0">Episode Tersedia</h5>
                         <div class="iq-custom-select d-inline-block">
                           <select class="select2-basic-single js-states form-control" id="selectSeason" onchange="fetchSeasons(this.value)">
-                            <option value="season1">Season 1</option>
-                            <option value="season1">Season 2</option>
+                            
                           </select>
                         </div>
                       </div>
@@ -293,42 +285,7 @@
             </div>
           
             <div id="source-01" class="animated fadeInUp">
-              <div class="source-list-content table-responsive">
-                <table class="table custom-table">
-                  <thead>
-                    <tr>
-                      <th>
-                        Links
-                      </th>
-                      <th>
-                        Nama Provider
-                      </th>
-                      <th>
-                        Resolusi yang tersedia
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="iq-button">
-                          <a href="movie-detail.html" class="btn text-uppercase position-relative">
-                            <span class="button-text"> Play Now</span>
-                            <i class="fa-solid fa-play"></i>
-                          </a>
-                        </div>
-                      </td>
-                      <td>
-                        Gdrive
-                      </td>
-                      <td>
-                        480p,720p,1080p
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
+             
             </div>
 
           </div>
@@ -538,112 +495,145 @@
     var id = new URLSearchParams(window.location.search).get('m');
     var season = new URLSearchParams(window.location.search).get('s');
     var episode = new URLSearchParams(window.location.search).get('e');
-fetch('https://film.gorjambon.online/series/' + id)
-  .then(response => response.json())
-  .then(res => {
-    var ratingHtml = '';
-    var rating = Math.floor(res.data.rating);
-    for (var i = 0; i < rating; i++) {
-      ratingHtml += `<li><i class="fa fa-star" aria-hidden="true"></i></li>`;
-    }
-    if (res.data.trailerUrl == '') {
-      document.getElementById('trailerWrapper').style.display = 'none';
-    } else {
-      document.getElementById('movieTrailer').src = res.data.trailerUrl.replace('watch?v=', 'embed/') + '?autoplay=1&mute=0';
-    }
-    document.getElementById('movieTitle').innerHTML = res.data.title + ' (Season ' + season + ' Episode ' + episode + ')';
-    document.getElementById('movieQuality').innerHTML = res.data.status;
-    document.getElementById('movieRating').innerHTML = ratingHtml;
-    document.getElementById('movieRatingText').innerHTML = res.data.rating + ' / 10 (IMDB)';
-    document.getElementById('movieTags').innerHTML = res.data.genres.map(tag => `<li class="trending-list"><a class="text-primary" href="view-all-movie.html">${tag}</a></li>`).join('');
-    document.getElementById('movieCasts').innerHTML = res.data.casts.join(', ');
-    document.getElementById('movieDuration').innerHTML = res.data.duration;
-    document.getElementById('movieDescription').innerHTML = res.data.synopsis;
-    document.getElementById('movieRelease').innerHTML = res.data.releaseDate;
-    document.getElementById('selectSeason').innerHTML = res.data.seasons.map(season => `<option value="${season.season}">Season ${season.season} (${season.totalEpisodes} Episodes)</option>`).join('');
-    document.getElementById('selectSeason').value = season;
-    var invertedSeason = res.data.seasons.reverse();
-    var currentSeason = invertedSeason[season - 1];
-    for(var i = 0; i < currentSeason['totalEpisodes']; i++) {
-      document.getElementById('episodeList').innerHTML += `
-      <li class="swiper-slide">
-          <a href="series-detail.html?m=${id}&s=${season}&e=${i + 1}">
-            <img src="${res.data.posterImg}" class="img-fluid" alt="">
-            <div class="epi-desc">
-              <h6 class="mb-0">Season ${season} Episode ${i + 1}</h6>
-              <p class="mb-0">${res.data.duration}</p>
-            </div>
-          </a>
-      </li>
-      `;
-    }
-  });
+    var totalEpisodes = 0;
 
+    // Fetch detail dan streams secara bersamaan
+    Promise.all([
+        fetch('https://film.gorjambon.online/series/' + id),
+        fetch('https://film.gorjambon.online/series/' + id + '/streams?season=' + season + '&episode=' + episode)
+    ])
+    .then(responses => Promise.all(responses.map(response => response.json())))
+    .then(([detailRes, streamRes]) => {
+        // Proses detail
+        var ratingHtml = '';
+        var rating = Math.floor(detailRes.data.rating);
+        for (var i = 0; i < rating; i++) {
+            ratingHtml += `<li><i class="fa fa-star" aria-hidden="true"></i></li>`;
+        }
+        if (detailRes.data.trailerUrl == '') {
+            document.getElementById('trailerWrapper').style.display = 'none';
+        } else {
+            document.getElementById('movieTrailer').src = detailRes.data.trailerUrl.replace('watch?v=', 'embed/') + '?autoplay=1&mute=0';
+        }
+        document.getElementById('movieTitle').innerHTML = detailRes.data.title + ' (Season ' + season + ' Episode ' + episode + ')';
+        document.getElementById('movieQuality').innerHTML = detailRes.data.status;
+        document.getElementById('movieRating').innerHTML = ratingHtml;
+        document.getElementById('movieRatingText').innerHTML = detailRes.data.rating + ' / 10 (IMDB)';
+        document.getElementById('movieTags').innerHTML = detailRes.data.genres.map(tag => `<li class="trending-list"><a class="text-primary" href="view-all-movie.html">${tag}</a></li>`).join('');
+        document.getElementById('movieCasts').innerHTML = detailRes.data.casts.join(', ');
+        document.getElementById('movieDuration').innerHTML = detailRes.data.duration;
+        document.getElementById('movieDescription').innerHTML = detailRes.data.synopsis;
+        document.getElementById('movieRelease').innerHTML = 'Dirilis Tanggal: ' + detailRes.data.releaseDate;
+        document.getElementById('selectSeason').innerHTML = detailRes.data.seasons.map(season => `<option value="${season.season}">Season ${season.season} (${season.totalEpisodes} Episodes)</option>`).join('');
+        document.getElementById('selectSeason').value = season;
+        var invertedSeason = detailRes.data.seasons.reverse();
+        var currentSeason = invertedSeason[season - 1];
+        totalEpisodes = currentSeason['totalEpisodes'];
 
-    fetch('https://film.gorjambon.online/series/' + id + '/streams?season=' + season + '&episode=' + episode)
-      .then(response => response.json())
-      .then(res => {
+        // Proses episode list
+        for (var i = 0; i < currentSeason['totalEpisodes']; i++) {
+            document.getElementById('episodeList').innerHTML += `
+            <li class="swiper-slide">
+                <a href="series-detail.html?m=${id}&s=${season}&e=${i + 1}">
+                    <img src="${detailRes.data.posterImg}" class="img-fluid" alt="">
+                    <div class="epi-desc">
+                        <h6 class="mb-0">Season ${season} Episode ${i + 1}</h6>
+                        <p class="mb-0">${detailRes.data.duration}</p>
+                    </div>
+                </a>
+            </li>
+            `;
+        }
+
+        // Proses streams
         var sourceHtml = '';
-        res.data.forEach(stream => {
-          sourceHtml += `
-      <tr>
-        <td>
-          <div class="iq-button">
-            <a href="${stream.url}" class="btn text-uppercase position-relative">
-              <span class="button-text"> Play Now</span>
-              <i class="fa-solid fa-play"></i>
-            </a>
-          </div>
-        </td>
-        <td>
-          ${stream.provider}
-        </td>
-        <td>
-          ${stream.resolutions.join(', ')}
-        </td>
-      </tr>
-      `;
+        streamRes.data.forEach(stream => {
+            sourceHtml += `
+            <tr>
+                <td>
+                    <div class="iq-button">
+                        <a href="${stream.url}" class="btn text-uppercase position-relative">
+                            <span class="button-text"> Play Now</span>
+                            <i class="fa-solid fa-play"></i>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    ${stream.provider}
+                </td>
+                <td>
+                    ${stream.resolutions.join(', ')}
+                </td>
+            </tr>
+            `;
+
+            if (stream.provider == 'TURBOV' || 'CAST') {
+                document.getElementById('mainNavigation').innerHTML = `
+                    <a href="${stream.url}" class="btn text-uppercase position-relative">
+                        <span class="button-text"> Tonton Episode ini</span>
+                        <i class="fa-solid fa-play"></i>
+                    </a> <br> <br> <br>
+                `;
+                // Logika tombol
+                let previousButton = episode == 1
+                    ? `<a href="#" class="text-uppercase position-relative" style="background-color: gray; color:white; padding:10px; border-radius: 5px; margin-right: 10px; pointer-events: none;">
+                            <span class="button-text">Eps Sebelumnya</span>
+                        </a>`
+                    : `<a href="series-detail.html?m=${id}&s=${season}&e=${episode - 1}" class="text-uppercase position-relative" style="background-color: dodgerblue; color:white; padding:10px; border-radius: 5px; margin-right: 10px;">
+                            <span class="button-text">Eps Sebelumnya</span>
+                        </a>`;
+
+                let nextButton = episode == totalEpisodes
+                    ? `<a href="#" class="text-uppercase position-relative" style="background-color: gray; color:white; padding:10px; border-radius: 5px; margin-right: 10px; pointer-events: none;">
+                            <span class="button-text">Eps Selanjutnya</span>
+                        </a>`
+                    : `<a href="series-detail.html?m=${id}&s=${season}&e=${parseInt(episode) + 1}" class="text-uppercase position-relative" style="background-color: dodgerblue; color:white; padding:10px; border-radius: 5px; margin-right: 10px;">
+                            <span class="button-text">Eps Selanjutnya</span>
+                        </a>`;
+
+                document.getElementById('mainNavigation').innerHTML += `
+                    ${previousButton}
+                    ${nextButton}
+                    <br><br><br>
+                `;
+            }
         });
+
         document.getElementById('source-01').innerHTML = `
-    <div class="source-list-content table-responsive">
-      <table class="table custom-table">
-        <thead>
-          <tr>
-            <th>
-              Links
-            </th>
-            <th>
-              Nama Provider
-            </th>
-            <th>
-              Resolusi yang tersedia
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          ${sourceHtml}
-        </tbody>
-      </table>
-    </div>
-    `;
-      })
+            <div class="source-list-content table-responsive">
+                <table class="table custom-table">
+                    <thead>
+                        <tr>
+                            <th>Links</th>
+                            <th>Nama Provider</th>
+                            <th>Resolusi yang tersedia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${sourceHtml}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    });
 
     function removeLS() {
-      localStorage.removeItem('islgd');
-      window.location.href = 'login.html';
+        localStorage.removeItem('islgd');
+        window.location.href = 'login.html';
     }
 
     function fetchSeasons(season) {
-      window.location.href = 'series-detail.html?m=' + id + '&s=' + season + '&e=1';
+        window.location.href = 'series-detail.html?m=' + id + '&s=' + season + '&e=1';
     }
 
     var search = document.getElementById("movieSearchInput");
     search.addEventListener("keyup", function (event) {
-      if (event.key === "Enter") {
-        window.location.href = 'search.html?s=' + search.value;
-      }
+        if (event.key === "Enter") {
+            window.location.href = 'search.html?s=' + search.value;
+        }
     });
-  </script>
+</script>
+
 </body>
 
 
