@@ -211,33 +211,29 @@
               <div class="d-block d-lg-flex align-items-center">
                 <h2 class="trending-text fw-bold texture-text text-uppercase my-0 fadeInLeft animated d-inline-block"
                   data-animation-in="fadeInLeft" data-delay-in="0.6" style="opacity: 1; animation-delay: 0.6s" id="movieTitle">
-                  Zombie Island
+                  
                 </h2>
                 <div class="slider-ratting d-flex align-items-center ms-lg-3 ms-0">
-                  <span class="badge bg-primary" style="margin-right: 4px;" id="movieQuality">Bluray</span>
+                  <span class="badge bg-primary" style="margin-right: 4px;" id="movieQuality"></span>
                   <ul class="ratting-start p-0 m-0 list-inline text-warning d-flex align-items-center justify-content-left" id="movieRating">
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star-half" aria-hidden="true"></i></li>
+                    
                   </ul>
                   <span class="text-white ms-2" id="movieRatingText"></span>
                 </div>
               </div>
               <ul class="p-0 mt-2 list-inline d-flex flex-wrap movie-tag" id="movieTags">
-                <li class="trending-list"><a class="text-primary" href="view-all-movie.html">Action</a></li>
-                <li class="trending-list"><a class="text-primary" href="view-all-movie.html">Adventure</a></li>
-                <li class="trending-list"><a class="text-primary" href="view-all-movie.html">Drama</a></li>
               </ul>
+              <div class="iq-button" id="playUtama">
+                
+              </div>
+              <br>
              
               <div class="d-flex flex-wrap align-items-center text-white text-detail flex-wrap mb-4">
-                <span class="badge bg-secondary" id="movieCasts">Jokowi</span>
-                <span class="ms-3 font-Weight-500 genres-info" id="movieDuration">1hr 48mins</span>
+                <span class="badge bg-secondary" id="movieCasts"></span>
+                <span class="ms-3 font-Weight-500 genres-info" id="movieDuration"></span>
               </div>
               <p class="trending-dec w-100 mb-4" id="movieDescription">
-                Zombie Island is a 1998 direct-to-video animated comedy horror film based on Hanna-Barbera's Scooby-Doo Saturday-morning cartoons. In the film, Shaggy, Scooby, Fred, Velma, and Daphne reunite after a year-long hiatus from Mystery, Inc. to investigate a bayou island said to be haunted by the ghost of the pirate Morgan Moonscar. The film was directed by Jim Stenstrum, from a screenplay by Glenn Leopold.
-              <p>Dirilis Tanggal: <span id="movieRelease"></span></p>
+              <p id="movieRelease"></p>
               
               
             </div>
@@ -247,42 +243,6 @@
           </div>
         </div>
         <div id="source-01" class="animated fadeInUp">
-          <div class="source-list-content table-responsive">
-            <table class="table custom-table">
-              <thead>
-                <tr>
-                  <th>
-                    Links
-                  </th>
-                  <th>
-                    Nama Provider
-                  </th>
-                  <th>
-                    Resolusi yang tersedia
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="iq-button">
-                      <a href="movie-detail.html" class="btn text-uppercase position-relative">
-                        <span class="button-text"> Play Now</span>
-                        <i class="fa-solid fa-play"></i>                 
-                      </a>
-                    </div>
-                  </td>
-                  <td>
-                    Gdrive
-                  </td>
-                  <td>
-                    480p,720p,1080p
-                  </td>
-                </tr>
-                
-              </tbody>
-            </table>
-          </div>
         </div>
      
     </div>
@@ -497,7 +457,7 @@
     document.getElementById('movieCasts').innerHTML = res.data.casts.join(', ');
     document.getElementById('movieDuration').innerHTML = res.data.duration;
     document.getElementById('movieDescription').innerHTML = res.data.synopsis;
-    document.getElementById('movieRelease').innerHTML = res.data.releaseDate;
+    document.getElementById('movieRelease').innerHTML = 'Dirilis Tanggal: ' + res.data.releaseDate;
     document.getElementById('movieTrailer').src = trailerSrc;
   })
 
@@ -525,6 +485,12 @@
         </td>
       </tr>
       `;
+      if(stream.provider == 'TURBOV'){
+        document.getElementById('playUtama').innerHTML = `<a href="${stream.url}" class="btn text-uppercase position-relative">
+                  <span class="button-text"> Gas Nonton!</span>
+                  <i class="fa-solid fa-play"></i>                 
+                </a>`;
+      }
     });
     document.getElementById('source-01').innerHTML = `
     <div class="source-list-content table-responsive">
