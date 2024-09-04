@@ -567,7 +567,7 @@
             </tr>
             `;
 
-            if (stream.provider == 'TURBOV' || 'CAST') {
+            if (stream.provider == 'TURBOV' || stream.provider == 'CAST') {
                 document.getElementById('mainNavigation').innerHTML = `
                     <a href="${stream.url}" class="btn text-uppercase position-relative">
                         <span class="button-text"> Tonton Episode ini</span>
