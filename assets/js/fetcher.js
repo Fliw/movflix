@@ -31,11 +31,19 @@ function loadRecommendedMovies() {
         return sortedMovies; // Kembalikan film yang sudah diurutkan
     }
 
-    // Ambil genre favorit dari localStorage
     const genres = JSON.parse(localStorage.getItem('favGenres'));
     if (!genres || genres.length === 0) {
-        document.getElementById('recommendedYou').innerHTML = '<p>Tidak dapat memuat rekomendasi</p>';
-        return; // Keluarkan dari fungsi jika tidak ada genre favorit
+        document.getElementById('ifRecommendNotExists').innerHTML = `
+        <dotlottie-player
+  autoplay=""
+  loop=""
+  src="https://assets-v2.lottiefiles.com/a/f0ec4bf6-117f-11ee-a568-3f00b396dc0b/c7ckQYzSl9.lottie"
+  style="width: 320px; margin: auto;"
+>
+</dotlottie-player>
+        <h4 class="text-center">Wadoo.. Belum ada rekomendasi nih, coba eksplor filmnya dulu</h4>
+        `;
+        return;
     }
 
     // Fetch data berdasarkan semua genre favorit dalam satu permintaan
