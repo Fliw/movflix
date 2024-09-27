@@ -454,6 +454,7 @@
     document.getElementById('movieRating').innerHTML = ratingHtml;
     document.getElementById('movieRatingText').innerHTML = res.data.rating + ' / 10 (IMDB)';
     document.getElementById('movieTags').innerHTML = res.data.genres.map(tag => `<li class="trending-list"><a class="text-primary" href="view-all-movie.html">${tag}</a></li>`).join('');
+    localStorage.setItem('favGenres', JSON.stringify(res.data.genres));
     document.getElementById('movieCasts').innerHTML = res.data.casts.join(', ');
     document.getElementById('movieDuration').innerHTML = res.data.duration;
     document.getElementById('movieDescription').innerHTML = res.data.synopsis;

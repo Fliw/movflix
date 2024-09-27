@@ -1,3 +1,93 @@
+function loadRecommendedMovies() {
+    // Fungsi untuk melakukan BFS dan mengurutkan film berdasarkan rating tertinggi per genre
+    function bfsSortMovies(pages) {
+        const movieMap = new Map(); // Untuk menyimpan film berdasarkan genre
+
+        // Lakukan BFS traversal
+        for (const page of pages) {
+            const genre = page.genre; // Ambil genre dari halaman
+            if (!movieMap.has(genre)) {
+                movieMap.set(genre, []); // Inisialisasi array untuk genre ini
+            }
+            movieMap.get(genre).push(...page.data); // Tambahkan film ke genre yang sesuai
+        }
+
+        const sortedMovies = []; // Array untuk menyimpan film yang sudah diurutkan
+        movieMap.forEach((movies) => {
+            const uniqueMovies = new Map(); // Map untuk menjaga keunikan film
+            
+            // Tambahkan film unik per genre
+            for (const movie of movies) {
+                if (!uniqueMovies.has(movie._id)) {
+                    uniqueMovies.set(movie._id, movie);
+                }
+            }
+            
+            // Mengurutkan film berdasarkan rating tertinggi
+            const sortedByRating = Array.from(uniqueMovies.values()).sort((a, b) => b.rating - a.rating);
+            sortedMovies.push(...sortedByRating); // Gabungkan ke dalam hasil akhir
+        });
+
+        return sortedMovies; // Kembalikan film yang sudah diurutkan
+    }
+
+    // Ambil genre favorit dari localStorage
+    const genres = JSON.parse(localStorage.getItem('favGenres'));
+    if (!genres || genres.length === 0) {
+        document.getElementById('recommendedYou').innerHTML = '<p>Tidak dapat memuat rekomendasi</p>';
+        return; // Keluarkan dari fungsi jika tidak ada genre favorit
+    }
+
+    // Fetch data berdasarkan semua genre favorit dalam satu permintaan
+    const fetchPromises = genres.map(genre => 
+        fetch(`https://film.gorjambon.online/genres/${genre}`).then(response => response.json())
+    );
+
+    Promise.all(fetchPromises)
+    .then(pages => {
+        const sortedMovies = bfsSortMovies(pages); // Mengurutkan film berdasarkan rating menggunakan BFS
+
+        // Tampilkan daftar film pada elemen recommendedYou
+        const popten = document.getElementById('recommendedYou');
+        popten.innerHTML = ''; // Kosongkan sebelum menambah konten baru
+        console.log(sortedMovies);
+        sortedMovies.forEach((movie, index) => {
+            const num = index + 1;
+            const slideContent = `
+                <li class="swiper-slide">
+                    <div class="iq-top-ten-block">
+                        <div class="block-image position-relative">
+                            <div class="img-box">
+                                <a class="overly-images" href="movie-detail.html?m=${movie._id}">
+                                    <img src="${movie.posterImg}" alt="movie-card" class="img-fluid object-cover">
+                                </a>
+                                <span class="top-ten-numbers texture-text">${num}</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            `;
+            popten.innerHTML += slideContent;
+        });
+
+        // Inisialisasi ulang Swiper setelah konten diperbarui
+        initializeSwiper();
+    })
+    .catch(error => {
+        console.error('Error fetching movies:', error);
+        document.getElementById('recommendedYou').innerHTML = '<p>Tidak dapat memuat rekomendasi</p>';
+    });
+}
+
+
+
+
+
+
+// Panggil fungsi loadRecommendedMovies untuk menjalankan kode
+loadRecommendedMovies();
+
+
 fetch('https://film.gorjambon.online/popular/movies')
     .then(response => response.json())
     .then(res => {
@@ -82,7 +172,6 @@ fetch('https://film.gorjambon.online/popular/movies')
     })
     .catch(error => console.error('Error fetching movies:', error));
 
-//same as popten
 fetch('https://film.gorjambon.online/popular/series')
     .then(response => response.json())
     .then(res => {
