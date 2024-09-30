@@ -65,9 +65,9 @@ function loadRecommendedMovies() {
                 <li class="swiper-slide">
                     <div class="iq-top-ten-block">
                         <div class="block-image position-relative">
-                            <div class="img-box">
+                            <div class="img-box" >
                                 <a class="overly-images" href="movie-detail.html?m=${movie._id}">
-                                    <img src="${movie.posterImg}" alt="movie-card" class="img-fluid object-cover">
+                                    <img src="${movie.posterImg}" alt="movie-card" class="img-fluid object-cover" style="border-radius:20px">
                                 </a>
                                 <span class="top-ten-numbers texture-text">${num}</span>
                             </div>
@@ -116,7 +116,7 @@ fetch('https://film.gorjambon.online/popular/movies')
             const slideContent = `
                 <div class="swiper-slide slide s-bg-1 p-0">
                     <div class="banner-home-swiper-image">
-                        <img src="${movie.posterImg}" alt="${movie.title}">
+                        <img src="${movie.posterImg}" alt="${movie.title}" style="border-radius:20px">
                     </div>
                     <div class="container-fluid position-relative h-100">
                         <div class="slider-inner h-100">
@@ -166,7 +166,7 @@ fetch('https://film.gorjambon.online/popular/movies')
                         <div class="block-image position-relative">
                             <div class="img-box">
                                 <a class="overly-images" href="movie-detail.html?m=${movie._id}">
-                                    <img src="${movie.posterImg}" alt="movie-card" class="img-fluid object-cover">
+                                    <img src="${movie.posterImg}" alt="movie-card" class="img-fluid object-cover" style="border-radius:20px">
                                 </a>
                                 <span class="top-ten-numbers texture-text">${num}</span>
                             </div>
@@ -195,7 +195,7 @@ fetch('https://film.gorjambon.online/popular/series')
                         <div class="block-image position-relative">
                             <div class="img-box">
                                 <a class="overly-images" href="series-detail.html?m=${serie._id}&s=1&e=1">
-                                    <img src="${serie.posterImg}" alt="movie-card" class="img-fluid object-cover">
+                                    <img src="${serie.posterImg}" alt="movie-card" class="img-fluid object-cover" style="border-radius:20px">
                                 </a>
                                 <span class="top-ten-numbers texture-text">${num}</span>
                             </div>
