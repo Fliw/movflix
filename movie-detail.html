@@ -440,7 +440,7 @@
 <script src="assets/js/rocket-loader.min.js"></script>
 <script>
   var id = new URLSearchParams(window.location.search).get('m');
-  fetch('https://film.gorjambon.online/movies/'+id)
+  fetch('https://pilem.premanto.lol/movies/'+id)
   .then(response => response.json())
   .then(res => {
     var ratingHtml = '';
@@ -462,8 +462,8 @@
     document.getElementById('movieTrailer').src = trailerSrc;
   })
 
-  //https://film.gorjambon.online/movies/wrath-of-man-2021/streams
-  fetch('https://film.gorjambon.online/movies/'+id+'/streams')
+  //https://pilem.premanto.lol/movies/wrath-of-man-2021/streams
+  fetch('https://pilem.premanto.lol/movies/'+id+'/streams')
   .then(response => response.json())
   .then(res => {
     var sourceHtml = '';

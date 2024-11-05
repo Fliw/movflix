@@ -48,7 +48,7 @@ function loadRecommendedMovies() {
 
     // Fetch data berdasarkan semua genre favorit dalam satu permintaan
     const fetchPromises = genres.map(genre => 
-        fetch(`https://film.gorjambon.online/genres/${genre}`).then(response => response.json())
+        fetch(`https://pilem.premanto.lol/genres/${genre}`).then(response => response.json())
     );
 
     Promise.all(fetchPromises)
@@ -96,7 +96,7 @@ function loadRecommendedMovies() {
 loadRecommendedMovies();
 
 
-fetch('https://film.gorjambon.online/popular/movies')
+fetch('https://pilem.premanto.lol/popular/movies')
     .then(response => response.json())
     .then(res => {
         console.log(res.data);
@@ -180,7 +180,7 @@ fetch('https://film.gorjambon.online/popular/movies')
     })
     .catch(error => console.error('Error fetching movies:', error));
 
-fetch('https://film.gorjambon.online/popular/series')
+fetch('https://pilem.premanto.lol/popular/series')
     .then(response => response.json())
     .then(res => {
         console.log(res.data);

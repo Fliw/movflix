@@ -499,8 +499,8 @@
 
     // Fetch detail dan streams secara bersamaan
     Promise.all([
-        fetch('https://film.gorjambon.online/series/' + id),
-        fetch('https://film.gorjambon.online/series/' + id + '/streams?season=' + season + '&episode=' + episode)
+        fetch('https://pilem.premanto.lol/series/' + id),
+        fetch('https://pilem.premanto.lol/series/' + id + '/streams?season=' + season + '&episode=' + episode)
     ])
     .then(responses => Promise.all(responses.map(response => response.json())))
     .then(([detailRes, streamRes]) => {
