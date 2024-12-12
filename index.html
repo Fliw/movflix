@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="assets/vendor/swiperSlider/swiper.min.css">
 
 
-
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css" rel="stylesheet">
 
 
   <!-- Streamit Design System Css -->
@@ -61,7 +61,8 @@
   <!-- loader Start -->
   <!-- loader Start -->
 
-  <!-- loader END --> <!-- loader END -->
+  <!-- loader END -->
+  <!-- loader END -->
   <main class="main-content">
     <!--Nav Start-->
     <header class="header-center-home header-default header-sticky">
@@ -196,7 +197,8 @@
           </div>
         </div>
       </nav>
-    </header> <!--Nav End-->
+    </header>
+    <!--Nav End-->
 
     <!--bread-crumb-->
     <!--bread-crumb-->
@@ -788,7 +790,7 @@
                     </div>
                   </div>
                 </div>
-                
+
               </div>
             </div>
           </div>
@@ -981,7 +983,8 @@
   <script src="assets/js/rocket-loader.min.js"></script>
   <script src="https://unpkg.com/@johanaarstein/dotlottie-player@latest/dist/index.js"></script>
   <script src="assets/js/fetcher.js"></script>
-  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+
   <script>
     if (!localStorage.getItem('islgd')) {
       window.location.href = 'login.html';
@@ -998,6 +1001,12 @@
         window.location.href = 'search.html?s=' + search.value;
       }
     });
+    Swal.fire({
+        title: 'Disclaimer',
+        text: 'Segala dosa ditanggung penonton, aku tidak bertanggung jawab atas segala dosa yang dicatat karna menonton film bajakan hehehe',
+        icon: 'danger',
+        confirmButtonText: 'Oke, aku siap menanggung dosa',
+      });
   </script>
 </body>
 
